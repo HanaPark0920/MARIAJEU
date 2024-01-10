@@ -8,6 +8,7 @@
     tools:context=".HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/start_constraintlayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -172,7 +173,6 @@
             android:elevation="10dp"
             />
 
-
         <View
             android:id="@+id/start_rectangle_1_v"
             android:layout_width="321dp"
@@ -185,6 +185,23 @@
             app:layout_constraintTop_toTopOf="parent"
             android:visibility="visible"/>
 
+        <View
+            android:id="@+id/start_rectangle_16_v"
+            android:layout_width="321dp"
+            android:layout_height="205dp"
+            android:layout_marginTop="212dp"
+            android:background="@drawable/rectangle_16"
+            android:clickable="false"
+            android:elevation="0dp"
+            android:focusable="false"
+            android:visibility="invisible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+
+
+
         <TextView
             android:id="@+id/start_choice_01_tv"
             android:layout_width="35dp"
@@ -196,6 +213,8 @@
             android:text="BOLD"
             android:textSize="10dp"
             android:gravity="top"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
         <View
             android:id="@+id/start_choice_01_v"
@@ -206,6 +225,10 @@
             app:layout_constraintTop_toBottomOf="@id/start_choice_01_tv"
             android:layout_marginTop="3.2dp"
             android:background="@drawable/rectangle_8"
+            android:translationZ="10dp"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <ImageView
             android:id="@+id/start_choice_01_iv"
@@ -216,6 +239,8 @@
             app:layout_constraintEnd_toEndOf="@id/start_choice_01_v"
             app:layout_constraintTop_toTopOf="@id/start_choice_01_v"
             app:layout_constraintBottom_toBottomOf="@id/start_choice_01_v"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
 
         <TextView
@@ -229,6 +254,8 @@
             android:text="ACIDIC"
             android:textSize="10dp"
             android:gravity="top"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
         <View
             android:id="@+id/start_choice_02_v"
@@ -239,6 +266,10 @@
             app:layout_constraintTop_toBottomOf="@id/start_choice_02_tv"
             android:layout_marginTop="3.2dp"
             android:background="@drawable/rectangle_8"
+            android:translationZ="10dp"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <ImageView
             android:id="@+id/start_choice_02_iv"
@@ -249,6 +280,8 @@
             app:layout_constraintEnd_toEndOf="@id/start_choice_02_v"
             app:layout_constraintTop_toTopOf="@id/start_choice_02_v"
             app:layout_constraintBottom_toBottomOf="@id/start_choice_02_v"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
 
         <TextView
@@ -262,6 +295,8 @@
             android:text="FIZZY"
             android:textSize="10dp"
             android:gravity="top"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
         <View
             android:id="@+id/start_choice_03_v"
@@ -272,6 +307,10 @@
             app:layout_constraintTop_toBottomOf="@id/start_choice_03_tv"
             android:layout_marginTop="3.2dp"
             android:background="@drawable/rectangle_8"
+            android:translationZ="10dp"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <ImageView
             android:id="@+id/start_choice_03_iv"
@@ -282,23 +321,9 @@
             app:layout_constraintEnd_toEndOf="@id/start_choice_03_v"
             app:layout_constraintTop_toTopOf="@id/start_choice_03_v"
             app:layout_constraintBottom_toBottomOf="@id/start_choice_03_v"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
-
-
-        <View
-            android:id="@+id/start_rectangle_16_v"
-            android:layout_width="321dp"
-            android:layout_height="205dp"
-            android:layout_marginTop="212dp"
-            android:background="@drawable/rectangle_16"
-            android:elevation="0dp"
-            android:visibility="invisible"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:clickable="false"
-            android:focusable="false"/>
-
         <TextView
             android:id="@+id/start_choice_04_tv"
             android:layout_width="35dp"
@@ -311,6 +336,8 @@
             android:textSize="10dp"
             android:gravity="top"
             android:visibility="invisible"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
         <View
             android:id="@+id/start_choice_04_v"
@@ -323,6 +350,10 @@
             android:background="@drawable/rectangle_8"
             android:gravity="top"
             android:visibility="invisible"
+            android:translationZ="10dp"
+            android:elevation="10dp"
+            android:focusable="true"
+            android:focusableInTouchMode="true"
             />
         <ImageView
             android:id="@+id/start_choice_04_iv"
@@ -335,8 +366,9 @@
             app:layout_constraintBottom_toBottomOf="@id/start_choice_04_v"
             android:gravity="top"
             android:visibility="invisible"
+            android:translationZ="10dp"
+            android:elevation="10dp"
             />
-
 
         <View
             android:id="@+id/start_mouseon_ex_v"
@@ -349,14 +381,16 @@
             app:layout_constraintStart_toStartOf="@id/start_rectangle_1_v"
             app:layout_constraintTop_toTopOf="@id/start_choice_01_v"
             android:clickable="false"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:translationZ="20dp"
+            android:elevation="20dp"/>
 
         <TextView
             android:id="@+id/start_mouseon_ex_tv"
             android:layout_width="252dp"
             android:layout_height="30dp"
             android:gravity="center_horizontal|top"
-            android:text=""
+            android:text="default"
             android:textColor="@color/black"
             android:textSize="12sp"
             android:visibility="invisible"
@@ -366,7 +400,12 @@
             app:layout_constraintTop_toTopOf="@id/start_mouseon_ex_v"
             app:layout_constraintVertical_bias="0.333"
             android:clickable="false"
-            android:focusable="false"/>
+            android:focusable="false"
+            android:translationZ="20dp"
+            android:elevation="20dp" />
+
+
+
 
         <View
             android:id="@+id/start_menu1_v"
@@ -398,16 +437,17 @@
             android:background="#D9D9D9"
             app:layout_constraintEnd_toEndOf="parent" />
 
+
         <TextView
             android:id="@+id/start_menu2_tv"
             android:layout_width="69dp"
             android:layout_height="14dp"
-            app:layout_constraintStart_toStartOf="@id/start_menu2_v"
-            app:layout_constraintTop_toBottomOf="@id/start_menu2_v"            android:layout_marginTop="10.5dp"
+            android:layout_marginTop="4dp"
+            android:gravity="top"
             android:text="감바스"
             android:textSize="11.9dp"
-            android:gravity="top" />
-
+            app:layout_constraintStart_toStartOf="@id/start_menu2_v"
+            app:layout_constraintTop_toBottomOf="@id/start_menu2_v" />
 
         <View
             android:id="@+id/start_menu3_v"

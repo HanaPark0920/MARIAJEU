@@ -1,7 +1,9 @@
 package com.example.mariajeu
 
+import android.content.Intent
 import androidx.fragment.app.Fragment
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +12,9 @@ import android.widget.TextView
 import android.view.MotionEvent
 import android.view.View.OnHoverListener
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.navigation.fragment.findNavController
 import com.example.mariajeu.databinding.FragmentStartBinding
+import androidx.constraintlayout.widget.ConstraintSet
 
 
 class StartFragment : Fragment() {
@@ -30,51 +34,60 @@ class StartFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val startLoginTextView = view.findViewById<TextView>(R.id.start_login_tv)
+        startLoginTextView.setOnClickListener {
+            // 클릭 이벤트 발생 시 LoginActivity 로 전환
+            val intent = Intent(activity, LoginActivity::class.java)
+            startActivity(intent)
+        }
+
         binding.startWhiteV.setOnClickListener { handleViewClick(binding.startWhiteV, binding.startWhiteTv) }
         binding.startRedV.setOnClickListener { handleViewClick(binding.startRedV, binding.startRedTv) }
         binding.startSparklingV.setOnClickListener { handleViewClick(binding.startSparklingV, binding.startSparklingTv) }
 
 
-        binding.startChoice01V.setOnHoverListener(createChoiceHoverListener(binding.startChoice01Tv))
-        binding.startChoice02V.setOnHoverListener(createChoiceHoverListener(binding.startChoice02Tv))
-        binding.startChoice03V.setOnHoverListener(createChoiceHoverListener(binding.startChoice03Tv))
-        binding.startChoice04V.setOnHoverListener(createChoiceHoverListener(binding.startChoice04Tv))
-
-        setMouseOnExTopMargin(R.id.start_choice_01_v)
+        binding.startChoice01V.setOnTouchListener(createChoiceTouchListener(binding.startChoice01Tv))
+        binding.startChoice02V.setOnTouchListener(createChoiceTouchListener(binding.startChoice02Tv))
+        binding.startChoice03V.setOnTouchListener(createChoiceTouchListener(binding.startChoice03Tv))
+        binding.startChoice04V.setOnTouchListener(createChoiceTouchListener(binding.startChoice04Tv))
     }
 
-    private fun createChoiceHoverListener(choiceTextView: TextView): View.OnHoverListener {
-        return View.OnHoverListener { _, event ->
+    private fun createChoiceTouchListener(choiceTextView: TextView): View.OnTouchListener {
+        return View.OnTouchListener { _, event ->
             when (event.action) {
-                MotionEvent.ACTION_HOVER_ENTER -> handleChoiceHover(choiceTextView)
-                MotionEvent.ACTION_HOVER_EXIT -> handleChoiceHoverEnd()
+                MotionEvent.ACTION_DOWN -> handleChoiceClickDown(choiceTextView)
+                MotionEvent.ACTION_UP -> handleChoiceClickUp()
             }
-            false
+            true
+            // true로 이벤트 계속 발생하게
         }
     }
 
-    private fun handleChoiceHover(choiceTextView: TextView) {
+    private fun handleChoiceClickDown(choiceTextView: TextView) {
         val choiceText = choiceTextView.text.toString()
+        Log.d("ClickEvent", "Mouse click down occurred for choice: $choiceText")
+
         when (choiceText) {
             "BOLD" -> setMouseOnExText("향이 뚜렷하고 쉽게 와인의 맛을 감별할 수 있는 맛.\n높을수록 Bold하며, 낮을수록 Light합니다.")
             "ACIDIC" -> setMouseOnExText("와인에서 느껴지는 신맛의 정도를 가리킵니다.\n높을수록 ACIDIC하며, 낮을수록 SOFT합니다.")
             "FIZZY" -> setMouseOnExText("거품을 부여하여 생동감 있고 상쾌한 맛.\n높을수록 FIZZY하며, 낮을수록 GENTLE합니다.")
             "TANNIC" -> setMouseOnExText("와인의 쓴맛과 떫은맛의 복합성을 더합니다.\n높을수록 TANNIC하며, 낮을수록 SMOOTH합니다.")
             "SWEET" -> setMouseOnExText("와인의 당도뿐 아니라 감미로운 맛을 표현합니다.\n높을수록 SWEET하며, 낮을수록 DRY합니다.")
-            else -> setMouseOnExText("") // 다른 경우에 대한 처리도 필요하다면 추가
+            else -> setMouseOnExText("")
         }
 
-        setMouseOnExTopMargin(getHoveredChoiceId())
+
+        setMouseOnExTopMargin(choiceTextView)
         binding.startMouseonExV.visibility = View.VISIBLE
         binding.startMouseonExTv.visibility = View.VISIBLE
     }
 
-    private fun handleChoiceHoverEnd() {
+    private fun handleChoiceClickUp() {
         binding.startMouseonExV.visibility = View.GONE
         binding.startMouseonExTv.visibility = View.GONE
     }
 
-    private fun getHoveredChoiceId(): Int {
+    private fun getClickedChoiceId(): Int {
         return when (selectedView?.id) {
             R.id.start_choice_01_v -> R.id.start_choice_01_v
             R.id.start_choice_02_v -> R.id.start_choice_02_v
@@ -83,15 +96,18 @@ class StartFragment : Fragment() {
             else -> R.id.start_choice_01_v
         }
     }
-    private fun setMouseOnExTopMargin(choiceViewId: Int) {
-        val params = binding.startMouseonExV.layoutParams as ConstraintLayout.LayoutParams
-        params.topToTop = choiceViewId
-        binding.startMouseonExV.layoutParams = params
-    }
 
     private fun setMouseOnExText(text: String) {
         binding.startMouseonExTv.text = text
     }
+
+    private fun setMouseOnExTopMargin(clickedView: View) {
+        val params = binding.startMouseonExV.layoutParams as ConstraintLayout.LayoutParams
+        params.topToTop = clickedView.id
+        binding.startMouseonExV.layoutParams = params
+    }
+
+
 
 
 
@@ -202,7 +218,5 @@ class StartFragment : Fragment() {
             choiceTextView3?.text = text3
         }
     }
-
-
 
 }
